@@ -1,7 +1,7 @@
 # EFI-bare-metal-riscv64
 
 Simple EFI application targeting RISC-V without any dependencies to GNU-EFI and/or EDK2. It's a
-nominalistic `Hello World!` application in plain assembly.
+minimalistic `Hello World!` application in plain assembly.
 
 ### NOTE
 
@@ -15,7 +15,7 @@ handcrafted in assembly.
 ### NOTE
 In this sample the GNU toolchains `riscv64-unknown-linux-gnu` are used. But I should also work with the
 bare-metal version from the GNU toolchains, because the current code doesn't need to build with the
-option position-interdependent code.
+option position-interdependent code (`-fpic`).
 
 ## Building from the application
 
@@ -32,7 +32,7 @@ $ make
 ## Output
 
 On successful build the root directory from the sources should contain the EFI application `hello.efi`.
-All other created files can be ignored in the following step.
+All other created files can be ignored in the following steps.
 
 ## Run the application
 
