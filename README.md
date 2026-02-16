@@ -5,12 +5,12 @@ minimalist `Hello World!` application in plain assembly.
 
 ### NOTE
 
-Because my current used toolchain doesn't support, the PE+ image (EFI image) directly it will be 
-handcrafted in assembly.
+The PE+ image header [(src/peheader.S)](https://github.com/Krotti83/EFI-bare-metal-riscv64/blob/main/src/peheader.S) is handcrafted in assembly in this sample. So therefore at 
+least `objcopy` doesn't *must* support the output of PE images directly.
 
 ## Required toolchains
 
-* GNU binutils targeting RISC-V
+* GNU binutils targeting RISC-V (only `as`, `ld`, `objcopy` needed)
 
 ### NOTE
 In this sample the GNU toolchains `riscv64-unknown-linux-gnu` are used. But I should also work with the
@@ -64,3 +64,8 @@ Booting /hello.efi
 Hello World!
 StarFive #
 ```
+## Used documentation
+
+[UEFI Specification 2.11](https://uefi.org/specs/UEFI/2.11/)
+[Portable Executable (PE+) Image Format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)
+[U-Boot Documentation](https://docs.u-boot.org/en/latest/usage/index.html)
