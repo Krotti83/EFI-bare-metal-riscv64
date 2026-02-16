@@ -32,10 +32,10 @@ _start:
     sd fp, 0(sp)
     addi fp, sp, 16
 
-    ld a0, 64(a1)
-    ld t0, 8(a0)
-    la a1, string_hello
-    jalr t0
+    ld a0, 64(a1)           /* Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL from EFI_SYSTEM_TABLE */
+    ld t0, 8(a0)            /* Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString() */
+    la a1, string_hello     /* Load address of string into register A1 */
+    jalr t0                 /* Call EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString() */
 
     ld ra, 8(sp)
     ld fp, 0(sp)
@@ -47,7 +47,7 @@ _start:
  */
 .section .rodata
 
-/* UTF-16 encode output string */
+/* UTF-16LE (CHAR16) encoded output string */
 string_hello:
 .byte 'H'
 .byte 0
