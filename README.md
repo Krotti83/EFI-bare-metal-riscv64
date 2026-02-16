@@ -1,7 +1,7 @@
 # EFI-bare-metal-riscv64
 
 Simple EFI application targeting RISC-V without any dependencies to GNU-EFI and/or EDK2. It's a
-minimalistic `Hello World!` application in plain assembly.
+minimalist `Hello World!` application in plain assembly.
 
 ### NOTE
 
@@ -15,7 +15,7 @@ handcrafted in assembly.
 ### NOTE
 In this sample the GNU toolchains `riscv64-unknown-linux-gnu` are used. But I should also work with the
 bare-metal version from the GNU toolchains, because the current code doesn't need to build with the
-option position-interdependent code (`-fpic`).
+option position-independent code (`-fpic`).
 
 ## Building from the application
 
@@ -26,6 +26,7 @@ $ git clone https://github.com/Krotti83/EFI-bare-metal-riscv64.git
 
 * Build the application
 ```
+$ cd EFI-bare-metal-riscv64
 $ make
 ```
 
@@ -50,7 +51,6 @@ Hello World!
 =>
 ```
 
-
 ### VisionFive 2 through U-Boot (real hardware)
 
 * Load the EFI image into memory
@@ -60,6 +60,7 @@ StarFive # fatload mmc 1:3 0x500000000 hello.efi
 * Start the application
 ```
 StarFive # bootefi 0x500000000
+Booting /hello.efi
 Hello World!
 StarFive #
 ```
