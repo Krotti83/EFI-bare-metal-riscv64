@@ -6,7 +6,7 @@ minimalist `Hello World!` application in plain assembly.
 ### NOTE
 
 The PE+ image header [(src/peheader.S)](https://github.com/Krotti83/EFI-bare-metal-riscv64/blob/main/src/peheader.S) is handcrafted in assembly in this sample. So therefore at 
-least `objcopy` doesn't *must* support the output of PE images directly.
+least `objcopy` doesn't *must* support the output of PE+ images directly.
 
 ## Required toolchains
 
@@ -64,8 +64,21 @@ Booting /hello.efi
 Hello World!
 StarFive #
 ```
+
+## TODO
+
+* Add *real* relocation support
+
+Currently a dummy `.reloc` section is used in the code, because most of the EFI loaders
+require a relocatable PE+ image. If not they refuse the execution of the code.
+
+* Reduce size of resulting binary image
+
+Currently the sections are page aligned (4KiB) in the output. Will try to reduce the size
+of the EFI image later.
+
 ## Used documentation
 
-[UEFI Specification 2.11](https://uefi.org/specs/UEFI/2.11/)
-[Portable Executable (PE+) Image Format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)
-[U-Boot Documentation](https://docs.u-boot.org/en/latest/usage/index.html)
+[UEFI Specification 2.11](https://uefi.org/specs/UEFI/2.11/)  
+[Portable Executable (PE+) Image Format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format)  
+[U-Boot Documentation](https://docs.u-boot.org/en/latest/usage/index.html)  
