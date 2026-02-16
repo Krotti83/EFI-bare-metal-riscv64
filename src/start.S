@@ -25,7 +25,16 @@
  * .text Section
  */
 .text
+
+/**
+ * Main entry point of the application
+ *
+ * Simple outputs the string "Hello World!" on the EFI console
+ * and exists.
+ */
 .global _start
+.func _start
+.type _start,%function
 _start:
     addi sp, sp, -16
     sd ra, 8(sp)
@@ -41,6 +50,7 @@ _start:
     ld fp, 0(sp)
     addi sp, sp, 16
     ret
+.endfunc
 
 /**
  * .rodata Section
