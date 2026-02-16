@@ -55,11 +55,11 @@ Hello World!
 
 * Load the EFI image into memory
 ```
-StarFive # fatload mmc 1:3 0x500000000 hello.efi
+StarFive # fatload mmc 1:3 0x50000000 hello.efi
 ```
 * Start the application
 ```
-StarFive # bootefi 0x500000000
+StarFive # bootefi 0x50000000
 Booting /hello.efi
 Hello World!
 StarFive #
