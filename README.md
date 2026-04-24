@@ -1,21 +1,22 @@
 # EFI-bare-metal-riscv64
 
-Simple EFI application targeting RISC-V without any dependencies to GNU-EFI and/or EDK2. It's a
-minimalist `Hello World!` application in plain assembly.
+Simple **EFI** application targeting **RISC-V** without any dependencies to *GNU-EFI* and/or *EDK2*. It's a minimalist `Hello World!` application in plain assembly.
 
 ### NOTE
 
-The PE+ image header [(src/peheader.S)](https://github.com/Krotti83/EFI-bare-metal-riscv64/blob/main/src/peheader.S) is handcrafted in assembly in this sample. So therefore at 
-least `objcopy` doesn't *must* support the output of PE+ images directly.
+The **PE+** image header [(src/peheader.S)](https://github.com/Krotti83/EFI-bare-metal-riscv64/blob/main/src/peheader.S) is handcrafted in assembly in this sample. So therefore at 
+least `objcopy` doesn't *must* support the output of **PE+** images directly.
 
 ## Required toolchains
 
+* Git
+* GNU make
 * GNU binutils targeting RISC-V (only `as`, `ld`, `objcopy` needed)
 
 ### NOTE
-In this sample the GNU toolchains `riscv64-unknown-linux-gnu` are used. But I should also work with the
-bare-metal version from the GNU toolchains, because the current code doesn't need to build with the
-option position-independent code (`-fpic`).
+In this sample the GNU toolchains `riscv64-unknown-linux-gnu` are used. But I should also work 
+with the bare-metal version from the GNU toolchains, because the current code doesn't need to 
+build with the option position-independent code (`-fpic`).
 
 ## Building from the application
 
@@ -32,8 +33,7 @@ $ make
 
 ## Output
 
-On successful build the root directory from the sources should contain the EFI application `hello.efi`.
-All other created files can be ignored in the following steps.
+On successful build the root directory from the sources should contain the **EFI** application `hello.efi`. All other created files can be ignored in the following steps.
 
 ## Run the application
 
@@ -41,11 +41,11 @@ All other created files can be ignored in the following steps.
 
 * Load the EFI image into memory
 ```
-=> fatload virtio 0:1 0x1100000000 hello.efi
+=> fatload virtio 0:1 $loadaddr hello.efi
 ```
 * Start the application
 ```
-=> bootefi 0x1100000000
+=> bootefi $loadaddr
 Booting /hello.efi
 Hello World!
 =>
@@ -55,11 +55,11 @@ Hello World!
 
 * Load the EFI image into memory
 ```
-StarFive # fatload mmc 1:3 0x50000000 hello.efi
+StarFive # fatload mmc 1:3 $loadaddr hello.efi
 ```
 * Start the application
 ```
-StarFive # bootefi 0x50000000
+StarFive # bootefi $loadaddr
 Booting /hello.efi
 Hello World!
 StarFive #
@@ -74,7 +74,7 @@ require a relocatable PE+ image. If not they refuse the execution of the code.
 
 * Reduce size of resulting binary image
 
-Currently the sections are page aligned (4KiB) in the output. Will try to reduce the size
+Currently the sections are page aligned (*4KiB*) in the output. Will try to reduce the size
 of the EFI image later.
 
 ## Used documentation
