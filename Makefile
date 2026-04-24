@@ -1,4 +1,4 @@
-
+#
 # EFI-bare-metal-riscv64
 #
 # Simple EFI application targeting RISC-V without any dependencies to
