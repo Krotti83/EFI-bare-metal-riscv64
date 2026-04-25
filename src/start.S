@@ -21,6 +21,8 @@
  *
  */
 
+.set EFI_SUCCESS, 0
+
 /**
  * .text Section
  */
@@ -41,10 +43,29 @@ _start:
     sd fp, 0(sp)
     addi fp, sp, 16
 
-    ld a0, 64(a1)           /* Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL from EFI_SYSTEM_TABLE */
-    ld t0, 8(a0)            /* Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString() */
-    la a1, string_hello     /* Load address of string into register A1 */
-    jalr t0                 /* Call EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString() */
+    /**
+     * Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL from
+     * EFI_SYSTEM_TABLE to register A0.
+     */
+    ld a0, 64(a1)
+
+    /**
+     * Save address of EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString()
+     * to register T0.
+     */
+    ld t0, 8(a0)
+
+    /**
+     * Load address of string 'string_hello' into register A1.
+     */
+    la a1, string_hello
+
+    /**
+     * Call/Invoke EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL->OutputString()
+     */
+    jalr t0
+
+    li a0, EFI_SUCCESS
 
     ld ra, 8(sp)
     ld fp, 0(sp)
