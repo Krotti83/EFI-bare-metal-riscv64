@@ -25,34 +25,37 @@ OUTPUT_FORMAT(elf64-littleriscv)
 
 ENTRY(_start)
 
+MEMORY {
+    IMAGE_FILE (rwx) : ORIGIN = 0x0, LENGTH = 0xFFFFFFFF
+}
+
 SECTIONS {
-    . = 0x0;
     _image_s = .;
 
     .peheader : {
         KEEP(*(.peheader))
-    }
+    } > IMAGE_FILE
 
-    .text : ALIGN(0x1000) {
+    .text ALIGN(0x1000) : {
         _text_s = .;
         *(.text)
         *(.text*)
         _text_e = .;
-    }
+    } > IMAGE_FILE
 
-    .reloc : ALIGN(0x1000) {
+    .reloc ALIGN(0x1000) : {
         _reloc_s = .;
         *(.reloc)
         *(.reloc*)
         _reloc_e = .;
-    }
+    } > IMAGE_FILE
 
-    .rodata : ALIGN(0x1000) {
+    .rodata ALIGN(0x1000) : {
         _rodata_s = .;
         *(.rodata)
         *(.rodata*)
         _rodata_e = .;
-    }
+    } > IMAGE_FILE
 
     _image_e = .;
 
