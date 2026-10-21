@@ -27,9 +27,25 @@ _header_s:
  * PE+: MS-DOS file header
  */
 header_msdos:
-    .ascii "MZ"
-    .skip 58
-    .word header_pe - header_msdos
+    .ascii "MZ"                             /* Magic number */
+    .short 0                                /* Bytes on last page of file */
+    .short 0                                /* Pages in file */
+    .short 0                                /* Relocations */
+    .short 0                                /* Size of header in paragraphs */
+    .short 0                                /* Minimum extra paragraphs needed */
+    .short 0                                /* Maximum extra paragraphs needed */
+    .short 0                                /* Initial (relative) SS value */
+    .short 0                                /* Initial SP value */
+    .short 0                                /* Checksum */
+    .short 0                                /* Initial IP value */
+    .short 0                                /* Initial (relative) CS value */
+    .short 0                                /* File address of relocation table */
+    .short 0                                /* Overlay number */
+    .skip 8                                 /* Reserved */
+    .short 0                                /* OEM identifier (for e_oeminfo) */
+    .short 0                                /* OEM information; e_oemid specific */
+    .skip 20                                /* Reserved */
+    .word header_pe - header_msdos          /* File address of new exe header */
 header_pe:
     .ascii "PE\0\0"
 
@@ -74,7 +90,7 @@ header_win:
     .short 0                                /* MinorSubsystemVersion */
     .word 0                                 /* Win32VersionValue */
     .word _image_e - _image_s               /* SizeOfImage */
-    .word _header_e - _header_e             /* SizeOfHeaders */
+    .word _header_e - _header_s             /* SizeOfHeaders */
     .word 0                                 /* CheckSum */
     .short 10                               /* Subsystem: IMAGE_SUBSYSTEM_EFI_APPLICATION */
     .short 0                                /* DllCharacteristics */
